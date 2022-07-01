@@ -65,3 +65,41 @@ categoría 5
 —  ¿Qué es modelo osi y para que sirve?
 Es el modelo de redes estructurados en capas o niveles, cada nivel se desarrolla sobre el interior de tal forma que recibe una serie de servicios sin conocer los detalles de cómo se realizan dichos servicios.
 sirve como marco de referencia para reducir la complejidad implícita en el estudio y diseño de las redes (LAN/WAN). El proceso de comunicación se describe como una jerarquía de siete capas o niveles. Cada capa tiene un propósito bien definido: brindar servicios de red a la capa superior, utilizando los servicios que le brinda la capa inferior. La capa de un nodo establece una comunicación virtual con la capa de otro nodo.
+
+
+protocolo arp
+
+
+También hay que mencionar que la caché ARP no es infinita, sino todo lo contrario. Tiene un tamaño limitado y además las direcciones solo permanecen en caché durante un tiempo. Esto es así para poder liberar espacio y también para evitar ataques cibernéticos que puedan robar o falsificar las direcciones. Si sabemos que un determinado equipo siempre va a tener la misma dirección IP-MAC, entonces podríamos añadir esta entrada en la tabla ARP como estática, no obstante, si por algún motivo este equipo cambia de IP, no podremos comunicarnos con él, porque nuesta tabla ARP no está actualizada.
+
+
+En qué consiste el protocolo ARP
+
+ARP son las siglas de Address Resolution Protocol. En español lo podemos traducir como Protocolo de resolución de direcciones. Es un protocolo de comunicaciones muy importante, ya que se encarga de vincular una dirección MAC o dirección física, con una dirección IP o dirección lógica. Este protocolo se desarrolló en la década de 1980 y hoy en día sigue siendo fundamental para el buen funcionamiento de las redes.
+
+    La dirección IP se trata de un número que se le asigna y hace referencia a un equipo en una red. Tiene como fin el facilitar que estos se distingan dentro de la misma. Puede ser pública o privada. En cuanto a la primera, es la que nos facilita nuestro proveedor de internet (ISP), y que nos identifica en Internet. Por otro lado, la privada es la que se establece en los dispositivos dentro de nuestra red doméstica.
+    En cuanto a la dirección MAC, es el número que identifica un componente de un equipo. En este caso, la tarjeta de red. Pueden ser utilizadas para permitir o denegar el acceso a internet de un equipo.
+
+Se encarga de permitir que un dispositivo conectado a una red pueda obtener una ruta MAC de otro equipo que está conectado a esa misma red, es decir, se encarga de «localizar» donde están los demás dispositivos cableados o inalámbricos en la red, preguntando por la dirección MAC de cada uno de ellos enviando un paquete a la dirección de broadcast que es FF:FF:FF:FF:FF:FF. Permite transmitir datos a través de una trama, ya que este protocolo se encuentra a nivel de capa de enlace. Es importante ya que la longitud de las direcciones IP y MAC no son iguales. La primera tiene una longitud de 32 bits y la segunda de 48 bits.
+
+Por tanto, lo que hace el protocolo ARP en el procedimiento de mapeo es traducir para que los sistemas puedan reconocerse entre sí. Hoy en día la resolución de direcciones IPv4 es la más utilizada, de ahí que este protocolo sea importante. ARP se encarga de «traducir» la dirección de 32 bits a 48 bits y viceversa, realmente lo que hace este protocolo es crear una tabla con una pareja IP-MAC donde posteriormente fijarse para poder transmitir todos los datos correctamente.
+Cuál es el funcionamiento de ARP
+
+Entonces, ¿cómo funciona exactamente el protocolo ARP? ¿Qué pasos son necesarios? Pongamos que hemos conectado un nuevo ordenador o cualquier dispositivo a la red. Ese equipo, para poder vincularse al router, va a recibir una dirección IP única. Esto es imprescindible para comunicarse y poder identificarse. Los paquetes de datos van a ir dirigidos a un host en particular. La puerta de enlace o el hardware de una red va a permitir que los datos fluyan y va a solicitar al protocolo ARP que encuentre una dirección MAC que coincida con esa dirección IP.
+
+Hay que tener en cuenta que esta información se almacena en caché, por lo que ese paso se realiza la primera vez. A partir de ahí, la caché ARP mantiene una lista con las diferentes direcciones IP y direcciones MAC correspondientes, es decir, existe una tabla ARP que ya tiene guardada toda la información necesaria para que este proceso no sea necesario realizarlo continuamente.
+
+Como dato a añadir, el propio usuario puede crear una tabla ARP estática donde almacenar esas direcciones IP y MAC. Pero de forma dinámica, esa caché ARP se almacena en los sistemas operativos en una red Ethernet IPv4. En cuanto un dispositivo va a solicitar la dirección MAC para enviar datos a cualquier otro equipo que esté conectado en esa red, se va a verificar la caché ARP. En caso de que exista, no sería necesario realizar una nueva solicitud.
+
+
+
+
+ARP Spoofing
+
+También se conoce como suplantación de ARP. Básicamente consiste en enviar ARP falsos. Puede asociar la dirección MAC de un atacante con una dirección IP. De esta forma podría recopilar información que se envía a través de una dirección IP y controlar el tráfico.
+
+Este tipo de ataque permite que un pirata informático pueda robar datos importantes de cualquier usuario particular o empresa en caso de un ataque exitoso. Lo pueden llevar a cabo a través de un dispositivo que previamente han atacado y controlado o incluso el suyo propio si está conectado a la red local.
+
+Esta amenaza se podría prevenir a través de tablas ARP estáticas. Esto evita que haya caché dinámica, aunque no es algo viable en la mayoría de casos. En estos casos tendríamos que mantener una inspección constante para evitar la suplantación. Para que este tipo de ataques puedan ocurrir es necesario que el ciberdelincuente utilice ciertas herramientas como pueden ser Arpspoof o Driftnet.
+
+También podemos relacionar esto con los ataques Man in the Middle. Lo que hace el atacante es interceptar todo lo que se envía, como pueden ser contraseñas o datos. Si la red está desprotegida, puede llegar a suplantar la identidad y obtener cierta información confidencial. Lo que hace el atacante literalmente es estar en medio de la comunicación, escuchando todo lo que se envía y recibe.
